@@ -1,9 +1,5 @@
 FROM golang:1.15
 
-WORKDIR /go/src/github.com/ShunyaNagashige/golang-de
-
-RUN go mod init github.com/ShunyaNagashige/golang-de
-
 RUN go get github.com/uudashr/gopkgs/v2/cmd/gopkgs \
   github.com/ramya-rao-a/go-outline \
   github.com/nsf/gocode \
@@ -14,3 +10,7 @@ RUN go get github.com/uudashr/gopkgs/v2/cmd/gopkgs \
   github.com/go-delve/delve/cmd/dlv \
   golang.org/x/lint/golint \
   golang.org/x/tools/gopls
+
+WORKDIR /go/src/github.com/ShunyaNagashige/golang-de
+
+RUN go mod init github.com/ShunyaNagashige/golang-de
