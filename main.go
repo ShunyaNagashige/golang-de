@@ -2,44 +2,43 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
+
+//任意の値を、Stringer型に変換したい！！
 
 type Stringer interface{
 	String() string
 }
 
-//レシーバにできる型には制限があるので、こちらで定義して用意する
-type MyInt int
-type MyString string
-type Person struct{
-	name string
-	age int
-}
-
-func(i MyInt)String()string{
-	return fmt.Sprintln("整数")
-}
-
-func(p Person)String()string{
-	return fmt.Sprintln("Per")
-}
-
-func(s MyString)String()string{
-	return fmt.Sprintf("文字列")
-}
-
-func switchType(s Stringer){
-	switch v:=s.(type){
-	case MyInt:
-		fmt.Printf("%T:%v\n",v,v)
-	case MyString:
-		fmt.Printf("%T:%v\n",v,v)
-	case Person:
-		fmt.Printf("%v\n",v)
+//戻り値errorインタフェースについて
+//MyErrorはerrorインタフェースを実装しているため、MyErrorを返してもok
+func ToStringer(v interface{})(Stringer,error){
+	if s,ok:=v.(Stringer);ok{
+		return s,nil
 	}
+	return nil,MyError("CastError")
+}
+
+type MyError string
+
+//MyErrorはerrorインタフェースを実装する
+func(e MyError)Error()string{
+	return string(e)
+}
+
+type S string
+
+//Sをstringにキャスト
+func(s S)String()string{
+	return string(s)
 }
 
 func main(){
-	var s Stringer=Person{name:"Taro",age:20}
-	switchType(s)
+	v:=S("hoge")
+	if s,err:=ToStringer(v);err!=nil{
+		fmt.Fprintln(os.Stderr,"ERROR:",err)
+	}else{
+		fmt.Println(s.String())
+	}
 }
