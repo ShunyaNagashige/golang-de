@@ -11,6 +11,6 @@ RUN go get github.com/uudashr/gopkgs/v2/cmd/gopkgs \
   golang.org/x/lint/golint \
   golang.org/x/tools/gopls
 
-WORKDIR /go/src/github.com/ShunyaNagashige/golang-de
+WORKDIR /go/src/github.com/ShunyaNagashige/stringer-interface
 
-RUN go mod init github.com/ShunyaNagashige/golang-de
+RUN go mod init github.com/ShunyaNagashige/stringer-interface

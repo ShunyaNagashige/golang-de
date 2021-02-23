@@ -2,7 +2,7 @@
     "name": "Go",
     "dockerComposeFile": ["../docker-compose.yml"],
     "service": "api" ,
-    "workspaceFolder": "/go/src/github.com/ShunyaNagashige/golang-de",
+    "workspaceFolder": "/go/src/github.com/ShunyaNagashige/stringer-interface",
     "settings": {
       "terminal.integrated.shell.linux": "/bin/bash",
       "go.toolsManagement.checkForUpdates": "off",
